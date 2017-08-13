@@ -13,8 +13,10 @@ export class Date {
     }
     if (this.input.word.indexOf('/') >= 0) {
       this.create('/');
+      return this.input;
     } else {
       this.create('-');
+      return this.input;
     }
   }
   create (deli) {
@@ -22,6 +24,6 @@ export class Date {
     word = this.out[0] + deli + this.out[1] + deli + this.out[2];
     // console.log(word);
     this.input.word = word;
-    return this.input;
   }
 }
+module.exports = Date;
