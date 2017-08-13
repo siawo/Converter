@@ -10,7 +10,7 @@ export class SpecialMiddle {
     let date = /^\d{1,2}[/-]\d{1,2}[/-]\d{2,4}$/g;
     let time = /^\d{1,2}[:]\d{2}$/;
     let decfrac = /^\d+[/.]\d+$/;
-    let phone = /^0\d{10}$|^[+]\d{2}[-| ]\d{10}/;
+    let phone = /^0\d{10}$|^[+]\d{2}[-]\d{10}/;
     if (date.test(this.input)) {
       let dateOb = new Date(this.input);
       let out = dateOb.output();
