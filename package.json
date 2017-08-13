@@ -6,8 +6,8 @@
   "author": "Md Owais",
   "license": "MIT",
   "scripts": {
-    "test": "eslint src/js/*.js && jest --coverage",
-    "build": "webpack"
+    "test": "./node_modules/.bin/eslint src/js/*.js && ./node_modules/.bin/jest --coverage",
+    "build": "./node_modules/.bin/webpack --config ./scripts/webpack.config.js"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
