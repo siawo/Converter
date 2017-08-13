@@ -375,7 +375,7 @@ var SpecialMiddle = exports.SpecialMiddle = function () {
       var date = /^\d{1,2}[/-]\d{1,2}[/-]\d{2,4}$/g;
       var time = /^\d{1,2}[:]\d{2}$/;
       var decfrac = /^\d+[/.]\d+$/;
-      var phone = /^0\d{10}$|^[+]\d{2}[-| ]\d{10}/;
+      var phone = /^0\d{10}$|^[+]\d{2}[-]\d{10}/;
       if (date.test(this.input)) {
         var dateOb = new _Date.Date(this.input);
         var out = dateOb.output();
@@ -393,6 +393,8 @@ var SpecialMiddle = exports.SpecialMiddle = function () {
         var _phone = new _Phone.Phone(this.input);
         var _out3 = _phone.output();
         return _out3;
+      } else {
+        return this.input;
       }
     }
   }]);
