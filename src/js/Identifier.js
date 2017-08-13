@@ -22,6 +22,7 @@ class Identifier {
           that.c2++;
           dec = new Decider({ word: that.text[i], index: i });
           out = dec.decide();
+          // console.log(out);
           that.text[out.index] = out.word;
           // console.log(that.text);
           if (that.c1 === that.c2) {

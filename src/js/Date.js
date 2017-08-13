@@ -26,4 +26,3 @@ export class Date {
     this.input.word = word;
   }
 }
-module.exports = Date;

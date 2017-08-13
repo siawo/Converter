@@ -22,6 +22,7 @@ export class SpecialMiddle {
     } else if (decfrac.test(this.input.word)) {
       let decfracOb = new DecFrac(this.input);
       let out = decfracOb.output();
+      // console.log(out);
       return out;
     } else if (phone.test(this.input.word)) {
       let phone = new Phone(this.input);
