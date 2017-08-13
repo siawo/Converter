@@ -277,7 +277,7 @@ var Decider = exports.Decider = function () {
       var pref = /^\d+[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*/;
       // console.log(mid.test(this.input[i]));
       if (mid.test(this.input)) {
-        console.log(this.input);
+        // console.log(this.input);
         var special = new _Special_middle.SpecialMiddle(this.input);
         var out = special.whichSpecialMiddle();
         // console.log(out);
