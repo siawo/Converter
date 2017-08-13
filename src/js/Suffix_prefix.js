@@ -2,7 +2,6 @@ import { Num2Words } from './Num2Words.js';
 export class SuffixPrefix {
   constructor (word) {
     this.input = word;
-    this.select = 'none';
   }
   output () {
     var numpart = this.input.word.match(/\d+/);
