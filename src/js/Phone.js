@@ -13,6 +13,8 @@ export class Phone {
         word += this.input.word[i] + ' ';
       }
     }
-    console.log(word.trim());
+    // console.log(word.trim());
+    this.input.word = word.trim();
+    return this.input;
   }
 }

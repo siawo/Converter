@@ -23,7 +23,9 @@ export class DecFrac {
       word += num1.find() + ' ';
     }
     word = int + ' point ' + word.trim();
-    console.log(word);
+    // console.log(word);
+    this.input.word = word;
+    return this.input;
   }
   fraction () {
     let inp = this.input.word.split('/');
@@ -32,6 +34,8 @@ export class DecFrac {
     word = num.find();
     let num1 = new Num2Words(inp[1]);
     word += ' by ' + num1.find();
-    console.log(word);
+    // console.log(word);
+    this.input.word = word;
+    return this.input;
   }
 }

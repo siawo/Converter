@@ -6,7 +6,7 @@ export class Cardinal {
   output () {
     let num = new Num2Words(this.input.word);
     this.input.word = num.find();
-    console.log(this.input.word);
+    // console.log(this.input.word);
     return this.input;
   }
 }

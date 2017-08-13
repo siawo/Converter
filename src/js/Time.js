@@ -12,6 +12,8 @@ export class Time {
     }
     var word = '';
     word = this.out[0] + ':' + this.out[1];
-    console.log(word);
+    // console.log(word);
+    this.input.word = word;
+    return this.input;
   }
 }

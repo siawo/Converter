@@ -13,16 +13,20 @@ export class SpecialMiddle {
     let phone = /^0\d{10}$|^[+]\d{2}[-| ]\d{10}/;
     if (date.test(this.input.word)) {
       let dateOb = new Date(this.input);
-      dateOb.output();
+      let out = dateOb.output();
+      return out;
     } else if (time.test(this.input.word)) {
       let timeOb = new Time(this.input);
-      timeOb.output();
+      let out = timeOb.output();
+      return out;
     } else if (decfrac.test(this.input.word)) {
       let decfracOb = new DecFrac(this.input);
-      decfracOb.output();
+      let out = decfracOb.output();
+      return out;
     } else if (phone.test(this.input.word)) {
       let phone = new Phone(this.input);
-      phone.output();
+      let out = phone.output();
+      return out;
     }
   }
 }

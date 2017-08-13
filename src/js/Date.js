@@ -20,7 +20,8 @@ export class Date {
   create (deli) {
     var word = '';
     word = this.out[0] + deli + this.out[1] + deli + this.out[2];
-    console.log(word);
-    return word;
+    // console.log(word);
+    this.input.word = word;
+    return this.input;
   }
 }

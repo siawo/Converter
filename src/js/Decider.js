@@ -20,11 +20,13 @@ export class Decider {
     } else if (mid.test(this.input.word)) {
       // console.log(i);
       let special = new SpecialMiddle(this.input);
-      special.whichSpecialMiddle();
+      let out = special.whichSpecialMiddle();
+      return out;
     } else if (suf.test(this.input.word) || pref.test(this.input.word)) {
       let sufprefOb = new SuffixPrefix(this.input);
-      sufprefOb.output();
+      let out = sufprefOb.output();
       // console.log(this.input);
+      return out;
     }
   }
 }

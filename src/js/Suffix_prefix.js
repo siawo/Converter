@@ -11,7 +11,9 @@ export class SuffixPrefix {
     let word = '';
     if (/^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/.test(this.input.word)) {
       word = restpart[0] + num.find();
-      console.log(word);
+      // console.log(word);
+      this.input.word = word.trim();
+      return this.input;
     } else {
       word = num.find() + restpart[1];
       word = word.replace('threerd', 'third');
@@ -20,7 +22,9 @@ export class SuffixPrefix {
       word = word.replace('fiveth', 'fifth');
       word = word.replace('eightth', 'eighth');
       word = word.replace('nineth', 'ninth');
-      console.log(word);
+      // console.log(word);
+      this.input.word = word.trim();
+      return this.input;
     }
   }
 }
