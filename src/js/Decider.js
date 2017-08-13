@@ -14,7 +14,7 @@ export class Decider {
     let pref = /^\d+[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*/;
     // console.log(mid.test(this.input[i]));
     if (mid.test(this.input)) {
-      console.log(this.input);
+      // console.log(this.input);
       let special = new SpecialMiddle(this.input);
       let out = special.whichSpecialMiddle();
       // console.log(out);
