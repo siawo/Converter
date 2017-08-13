@@ -4,9 +4,9 @@ export class SuffixPrefix {
     this.input = word;
   }
   output () {
-    var numpart = this.input.word.match(/\d+/g);
+    var numpart = this.input.match(/\d+/g);
     // console.log(numpart);
-    var restpart = this.input.word.split(/\d+/);
+    var restpart = this.input.split(/\d+/);
     // console.log(restpart);
     let num;
     let numcontain = [];
@@ -15,10 +15,10 @@ export class SuffixPrefix {
       num = new Num2Words(numpart[i]);
       numcontain.push(num.find());
     }
-    // if (/^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/.test(this.input.word)) {
+    // if (/^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/.test(this.input)) {
     // word = restpart[0] + num.find();
     // console.log(word);
-    // this.input.word = word.trim();
+    // this.input = word.trim();
     // return this.input;
     // } else {
 
@@ -37,7 +37,7 @@ export class SuffixPrefix {
     word = word.replace('eightth', 'eighth');
     word = word.replace('nineth', 'ninth');
     // console.log(word);
-    this.input.word = word.trim();
+    this.input = word.trim();
     return this.input;
   }
 }
