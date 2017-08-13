@@ -5,13 +5,13 @@ export class Date {
     this.out = [];
   }
   output () {
-    // console.log(this.input.word);
-    let inp = this.input.word.split(/[/]|[-]/);
+    // console.log(this.input);
+    let inp = this.input.split(/[/]|[-]/);
     for (let i = 0; i < inp.length; i++) {
       let num = new Num2Words(inp[i]);
       this.out.push(num.find());
     }
-    if (this.input.word.indexOf('/') >= 0) {
+    if (this.input.indexOf('/') >= 0) {
       this.create('/');
       return this.input;
     } else {
@@ -23,6 +23,6 @@ export class Date {
     var word = '';
     word = this.out[0] + deli + this.out[1] + deli + this.out[2];
     // console.log(word);
-    this.input.word = word;
+    this.input = word;
   }
 }

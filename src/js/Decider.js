@@ -12,18 +12,18 @@ export class Decider {
     // let sufpref = /^[A-Za-z]*\d+[A-Za-z]*/;
     let suf = /^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/;
     let pref = /^\d+[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*/;
-    // console.log(mid.test(this.input[i].word));
-    if (dig.test(this.input.word)) {
-      let cardinalOb = new Cardinal(this.input);
-      let out = cardinalOb.output();
-      return out;
-    } else if (mid.test(this.input.word)) {
+    // console.log(mid.test(this.input[i]));
+    if (mid.test(this.input)) {
       console.log(this.input);
       let special = new SpecialMiddle(this.input);
       let out = special.whichSpecialMiddle();
       // console.log(out);
       return out;
-    } else if (suf.test(this.input.word) || pref.test(this.input.word)) {
+    } else if (dig.test(this.input)) {
+      let cardinalOb = new Cardinal(this.input);
+      let out = cardinalOb.output();
+      return out;
+    } else if (suf.test(this.input) || pref.test(this.input)) {
       let sufprefOb = new SuffixPrefix(this.input);
       let out = sufprefOb.output();
       // console.log(this.input);

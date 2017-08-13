@@ -4,9 +4,9 @@ export class Cardinal {
     this.input = input;
   }
   output () {
-    let num = new Num2Words(this.input.word);
-    this.input.word = num.find();
-    // console.log(this.input.word);
+    let num = new Num2Words(this.input);
+    this.input = num.find();
+    // console.log(this.input);
     return this.input;
   }
 }
