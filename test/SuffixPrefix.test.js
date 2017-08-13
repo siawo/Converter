@@ -1,11 +1,11 @@
 import {SuffixPrefix} from '../src/js/Suffix_prefix.js';
-test('adds 1 + 2 to equal 3', () => {
-  let suf = new SuffixPrefix('@ab12');
-  let out = suf.output();
+test('check for suffix', () => {
+  let pref = new SuffixPrefix('@ab12');
+  let out = pref.output();
   expect(out).toBe('@abtwelve');
 });
-test('adds 1 + 2 to equal 3', () => {
-  let pref = new SuffixPrefix('3rd');
-  let out = pref.output();
+test('check for prefix', () => {
+  let suf = new SuffixPrefix('3rd');
+  let out = suf.output();
   expect(out).toBe('third');
 });
