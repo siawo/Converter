@@ -1,8 +1,16 @@
+const path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './src/js/Identifier.js',
   output: {
-    filename: './build/bundle.js'
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'build')
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.template.ejs'
+    })
+  ],
   module: {
     loaders: [
       {
