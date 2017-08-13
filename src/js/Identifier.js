@@ -30,14 +30,18 @@ class Identifier {
         }, 0, this);
       }
     }
+    if (this.c1 === 0) {
+      this.output();
+    }
   }
 
   output () {
-    document.getElementById('output').innerHTML = this.text.join(' ');
+    document.getElementById('output').innerHTML += this.text.join(' ');
   }
 }
 let checker = () => {
   let input = document.getElementById('input').value;
+  document.getElementById('output').innerHTML = '';
   let i = new Identifier(input);
   i.send();
 };
