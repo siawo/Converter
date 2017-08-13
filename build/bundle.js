@@ -290,6 +290,8 @@ var Decider = exports.Decider = function () {
         var _out2 = sufprefOb.output();
         // console.log(this.input);
         return _out2;
+      } else {
+        return this.input;
       }
     }
   }]);
@@ -645,27 +647,41 @@ var SuffixPrefix = exports.SuffixPrefix = function () {
   _createClass(SuffixPrefix, [{
     key: 'output',
     value: function output() {
-      var numpart = this.input.word.match(/\d+/);
+      var numpart = this.input.word.match(/\d+/g);
+      // console.log(numpart);
       var restpart = this.input.word.split(/\d+/);
-      var num = new _Num2Words.Num2Words(numpart[0]);
+      // console.log(restpart);
+      var num = void 0;
+      var numcontain = [];
       var word = '';
-      if (/^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/.test(this.input.word)) {
-        word = restpart[0] + num.find();
-        // console.log(word);
-        this.input.word = word.trim();
-        return this.input;
-      } else {
-        word = num.find() + restpart[1];
-        word = word.replace('threerd', 'third');
-        word = word.replace('onest', 'first');
-        word = word.replace('twond', 'second');
-        word = word.replace('fiveth', 'fifth');
-        word = word.replace('eightth', 'eighth');
-        word = word.replace('nineth', 'ninth');
-        // console.log(word);
-        this.input.word = word.trim();
-        return this.input;
+      for (var i = 0; i < numpart.length; i++) {
+        num = new _Num2Words.Num2Words(numpart[i]);
+        numcontain.push(num.find());
       }
+      // if (/^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/.test(this.input.word)) {
+      // word = restpart[0] + num.find();
+      // console.log(word);
+      // this.input.word = word.trim();
+      // return this.input;
+      // } else {
+
+      // word = num.find() + restpart[1];
+      for (var _i = 0; _i < restpart.length; _i++) {
+        if (numcontain[_i] !== undefined) {
+          word += restpart[_i] + numcontain[_i];
+        } else {
+          word += restpart[_i];
+        }
+      }
+      word = word.replace('threerd', 'third');
+      word = word.replace('onest', 'first');
+      word = word.replace('twond', 'second');
+      word = word.replace('fiveth', 'fifth');
+      word = word.replace('eightth', 'eighth');
+      word = word.replace('nineth', 'ninth');
+      // console.log(word);
+      this.input.word = word.trim();
+      return this.input;
     }
   }]);
 
