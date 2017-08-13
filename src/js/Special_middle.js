@@ -11,20 +11,20 @@ export class SpecialMiddle {
     let time = /^\d{1,2}[:]\d{2}$/;
     let decfrac = /^\d+[/.]\d+$/;
     let phone = /^0\d{10}$|^[+]\d{2}[-| ]\d{10}/;
-    if (date.test(this.input.word)) {
+    if (date.test(this.input)) {
       let dateOb = new Date(this.input);
       let out = dateOb.output();
       return out;
-    } else if (time.test(this.input.word)) {
+    } else if (time.test(this.input)) {
       let timeOb = new Time(this.input);
       let out = timeOb.output();
       return out;
-    } else if (decfrac.test(this.input.word)) {
+    } else if (decfrac.test(this.input)) {
       let decfracOb = new DecFrac(this.input);
       let out = decfracOb.output();
       // console.log(out);
       return out;
-    } else if (phone.test(this.input.word)) {
+    } else if (phone.test(this.input)) {
       let phone = new Phone(this.input);
       let out = phone.output();
       return out;

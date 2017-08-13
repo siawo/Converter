@@ -198,11 +198,12 @@ var Identifier = function () {
           _this.c1++;
           // console.log(text[i]);
           setTimeout(function (that) {
+            var j = i;
             that.c2++;
-            dec = new _Decider.Decider({ word: that.text[i], index: i });
+            dec = new _Decider.Decider(that.text[i]);
             out = dec.decide();
             // console.log(out);
-            that.text[out.index] = out.word;
+            that.text[j] = out;
             // console.log(that.text);
             if (that.c1 === that.c2) {
               that.output();
@@ -274,18 +275,18 @@ var Decider = exports.Decider = function () {
       // let sufpref = /^[A-Za-z]*\d+[A-Za-z]*/;
       var suf = /^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/;
       var pref = /^\d+[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*/;
-      // console.log(mid.test(this.input[i].word));
-      if (dig.test(this.input.word)) {
-        var cardinalOb = new _Cardinal.Cardinal(this.input);
-        var out = cardinalOb.output();
-        return out;
-      } else if (mid.test(this.input.word)) {
+      // console.log(mid.test(this.input[i]));
+      if (mid.test(this.input)) {
         console.log(this.input);
         var special = new _Special_middle.SpecialMiddle(this.input);
-        var _out = special.whichSpecialMiddle();
+        var out = special.whichSpecialMiddle();
         // console.log(out);
+        return out;
+      } else if (dig.test(this.input)) {
+        var cardinalOb = new _Cardinal.Cardinal(this.input);
+        var _out = cardinalOb.output();
         return _out;
-      } else if (suf.test(this.input.word) || pref.test(this.input.word)) {
+      } else if (suf.test(this.input) || pref.test(this.input)) {
         var sufprefOb = new _Suffix_prefix.SuffixPrefix(this.input);
         var _out2 = sufprefOb.output();
         // console.log(this.input);
@@ -327,9 +328,9 @@ var Cardinal = exports.Cardinal = function () {
   _createClass(Cardinal, [{
     key: 'output',
     value: function output() {
-      var num = new _Num2Words.Num2Words(this.input.word);
-      this.input.word = num.find();
-      // console.log(this.input.word);
+      var num = new _Num2Words.Num2Words(this.input);
+      this.input = num.find();
+      // console.log(this.input);
       return this.input;
     }
   }]);
@@ -375,20 +376,20 @@ var SpecialMiddle = exports.SpecialMiddle = function () {
       var time = /^\d{1,2}[:]\d{2}$/;
       var decfrac = /^\d+[/.]\d+$/;
       var phone = /^0\d{10}$|^[+]\d{2}[-| ]\d{10}/;
-      if (date.test(this.input.word)) {
+      if (date.test(this.input)) {
         var dateOb = new _Date.Date(this.input);
         var out = dateOb.output();
         return out;
-      } else if (time.test(this.input.word)) {
+      } else if (time.test(this.input)) {
         var timeOb = new _Time.Time(this.input);
         var _out = timeOb.output();
         return _out;
-      } else if (decfrac.test(this.input.word)) {
+      } else if (decfrac.test(this.input)) {
         var decfracOb = new _Dec_frac.DecFrac(this.input);
         var _out2 = decfracOb.output();
         // console.log(out);
         return _out2;
-      } else if (phone.test(this.input.word)) {
+      } else if (phone.test(this.input)) {
         var _phone = new _Phone.Phone(this.input);
         var _out3 = _phone.output();
         return _out3;
@@ -428,13 +429,13 @@ var Date = exports.Date = function () {
   _createClass(Date, [{
     key: 'output',
     value: function output() {
-      // console.log(this.input.word);
-      var inp = this.input.word.split(/[/]|[-]/);
+      // console.log(this.input);
+      var inp = this.input.split(/[/]|[-]/);
       for (var i = 0; i < inp.length; i++) {
         var num = new _Num2Words.Num2Words(inp[i]);
         this.out.push(num.find());
       }
-      if (this.input.word.indexOf('/') >= 0) {
+      if (this.input.indexOf('/') >= 0) {
         this.create('/');
         return this.input;
       } else {
@@ -448,7 +449,7 @@ var Date = exports.Date = function () {
       var word = '';
       word = this.out[0] + deli + this.out[1] + deli + this.out[2];
       // console.log(word);
-      this.input.word = word;
+      this.input = word;
     }
   }]);
 
@@ -484,7 +485,7 @@ var Time = exports.Time = function () {
   _createClass(Time, [{
     key: 'output',
     value: function output() {
-      var inp = this.input.word.split(/[:]/);
+      var inp = this.input.split(/[:]/);
       for (var i = 0; i < inp.length; i++) {
         var num = new _Num2Words.Num2Words(inp[i]);
         this.out.push(num.find());
@@ -492,7 +493,7 @@ var Time = exports.Time = function () {
       var word = '';
       word = this.out[0] + ':' + this.out[1];
       // console.log(word);
-      this.input.word = word;
+      this.input = word;
       return this.input;
     }
   }]);
@@ -528,8 +529,8 @@ var DecFrac = exports.DecFrac = function () {
   _createClass(DecFrac, [{
     key: 'output',
     value: function output() {
-      if (this.input.word.indexOf('.') >= 0) {
-        // console.log(this.input.word.indexOf('.'));
+      if (this.input.indexOf('.') >= 0) {
+        // console.log(this.input.indexOf('.'));
         // console.log(this.input);
         this.decimal();
         return this.input;
@@ -541,7 +542,7 @@ var DecFrac = exports.DecFrac = function () {
   }, {
     key: 'decimal',
     value: function decimal() {
-      var inp = this.input.word.split('.');
+      var inp = this.input.split('.');
       var num = new _Num2Words.Num2Words(inp[0]);
       var int = '';
       int = num.find();
@@ -553,20 +554,20 @@ var DecFrac = exports.DecFrac = function () {
       }
       word = int + ' point ' + word.trim();
       // console.log(word);
-      this.input.word = word;
+      this.input = word;
       // console.log(this.input);
     }
   }, {
     key: 'fraction',
     value: function fraction() {
-      var inp = this.input.word.split('/');
+      var inp = this.input.split('/');
       var num = new _Num2Words.Num2Words(inp[0]);
       var word = '';
       word = num.find();
       var num1 = new _Num2Words.Num2Words(inp[1]);
       word += ' by ' + num1.find();
       // console.log(word);
-      this.input.word = word;
+      this.input = word;
     }
   }]);
 
@@ -602,16 +603,16 @@ var Phone = exports.Phone = function () {
     key: 'output',
     value: function output() {
       var word = '';
-      for (var i = 0; i < this.input.word.length; i++) {
-        if (!isNaN(parseInt(this.input.word[i]))) {
-          var num = new _Num2Words.Num2Words(this.input.word[i]);
+      for (var i = 0; i < this.input.length; i++) {
+        if (!isNaN(parseInt(this.input[i]))) {
+          var num = new _Num2Words.Num2Words(this.input[i]);
           word += num.find() + ' ';
         } else {
-          word += this.input.word[i] + ' ';
+          word += this.input[i] + ' ';
         }
       }
       // console.log(word.trim());
-      this.input.word = word.trim();
+      this.input = word.trim();
       return this.input;
     }
   }]);
@@ -647,9 +648,9 @@ var SuffixPrefix = exports.SuffixPrefix = function () {
   _createClass(SuffixPrefix, [{
     key: 'output',
     value: function output() {
-      var numpart = this.input.word.match(/\d+/g);
+      var numpart = this.input.match(/\d+/g);
       // console.log(numpart);
-      var restpart = this.input.word.split(/\d+/);
+      var restpart = this.input.split(/\d+/);
       // console.log(restpart);
       var num = void 0;
       var numcontain = [];
@@ -658,10 +659,10 @@ var SuffixPrefix = exports.SuffixPrefix = function () {
         num = new _Num2Words.Num2Words(numpart[i]);
         numcontain.push(num.find());
       }
-      // if (/^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/.test(this.input.word)) {
+      // if (/^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/.test(this.input)) {
       // word = restpart[0] + num.find();
       // console.log(word);
-      // this.input.word = word.trim();
+      // this.input = word.trim();
       // return this.input;
       // } else {
 
@@ -680,7 +681,7 @@ var SuffixPrefix = exports.SuffixPrefix = function () {
       word = word.replace('eightth', 'eighth');
       word = word.replace('nineth', 'ninth');
       // console.log(word);
-      this.input.word = word.trim();
+      this.input = word.trim();
       return this.input;
     }
   }]);

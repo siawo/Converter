@@ -5,7 +5,7 @@ export class Time {
     this.out = [];
   }
   output () {
-    let inp = this.input.word.split(/[:]/);
+    let inp = this.input.split(/[:]/);
     for (let i = 0; i < inp.length; i++) {
       let num = new Num2Words(inp[i]);
       this.out.push(num.find());
@@ -13,7 +13,7 @@ export class Time {
     var word = '';
     word = this.out[0] + ':' + this.out[1];
     // console.log(word);
-    this.input.word = word;
+    this.input = word;
     return this.input;
   }
 }

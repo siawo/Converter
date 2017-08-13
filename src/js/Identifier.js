@@ -19,11 +19,12 @@ class Identifier {
         this.c1++;
         // console.log(text[i]);
         setTimeout(function (that) {
+          let j = i;
           that.c2++;
-          dec = new Decider({ word: that.text[i], index: i });
+          dec = new Decider(that.text[i]);
           out = dec.decide();
           // console.log(out);
-          that.text[out.index] = out.word;
+          that.text[j] = out;
           // console.log(that.text);
           if (that.c1 === that.c2) {
             that.output();
