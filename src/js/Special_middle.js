@@ -28,6 +28,8 @@ export class SpecialMiddle {
       let phone = new Phone(this.input);
       let out = phone.output();
       return out;
+    } else {
+      return this.input;
     }
   }
 }
