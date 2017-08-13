@@ -1,4 +1,4 @@
-const Date = require('../src/js/Date.js');
+import {Date} from '../src/js/Date.js';
 test('adds 1 + 2 to equal 3', () => {
   let date = new Date({ word: '12/12/12' });
   let out = date.output();

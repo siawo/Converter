@@ -18,15 +18,18 @@ export class Decider {
       let out = cardinalOb.output();
       return out;
     } else if (mid.test(this.input.word)) {
-      // console.log(i);
+      console.log(this.input);
       let special = new SpecialMiddle(this.input);
       let out = special.whichSpecialMiddle();
+      // console.log(out);
       return out;
     } else if (suf.test(this.input.word) || pref.test(this.input.word)) {
       let sufprefOb = new SuffixPrefix(this.input);
       let out = sufprefOb.output();
       // console.log(this.input);
       return out;
+    } else {
+      return this.input;
     }
   }
 }

@@ -201,6 +201,7 @@ var Identifier = function () {
             that.c2++;
             dec = new _Decider.Decider({ word: that.text[i], index: i });
             out = dec.decide();
+            // console.log(out);
             that.text[out.index] = out.word;
             // console.log(that.text);
             if (that.c1 === that.c2) {
@@ -213,11 +214,14 @@ var Identifier = function () {
       for (var i = 0; i < this.text.length; i++) {
         _loop(i);
       }
+      if (this.c1 === 0) {
+        this.output();
+      }
     }
   }, {
     key: 'output',
     value: function output() {
-      document.getElementById('output').innerHTML = this.text.join(' ');
+      document.getElementById('output').innerHTML += this.text.join(' ');
     }
   }]);
 
@@ -226,6 +230,7 @@ var Identifier = function () {
 
 var checker = function checker() {
   var input = document.getElementById('input').value;
+  document.getElementById('output').innerHTML = '';
   var i = new Identifier(input);
   i.send();
 };
@@ -275,15 +280,18 @@ var Decider = exports.Decider = function () {
         var out = cardinalOb.output();
         return out;
       } else if (mid.test(this.input.word)) {
-        // console.log(i);
+        console.log(this.input);
         var special = new _Special_middle.SpecialMiddle(this.input);
         var _out = special.whichSpecialMiddle();
+        // console.log(out);
         return _out;
       } else if (suf.test(this.input.word) || pref.test(this.input.word)) {
         var sufprefOb = new _Suffix_prefix.SuffixPrefix(this.input);
         var _out2 = sufprefOb.output();
         // console.log(this.input);
         return _out2;
+      } else {
+        return this.input;
       }
     }
   }]);
@@ -378,6 +386,7 @@ var SpecialMiddle = exports.SpecialMiddle = function () {
       } else if (decfrac.test(this.input.word)) {
         var decfracOb = new _Dec_frac.DecFrac(this.input);
         var _out2 = decfracOb.output();
+        // console.log(out);
         return _out2;
       } else if (phone.test(this.input.word)) {
         var _phone = new _Phone.Phone(this.input);
@@ -427,8 +436,10 @@ var Date = exports.Date = function () {
       }
       if (this.input.word.indexOf('/') >= 0) {
         this.create('/');
+        return this.input;
       } else {
         this.create('-');
+        return this.input;
       }
     }
   }, {
@@ -438,7 +449,6 @@ var Date = exports.Date = function () {
       word = this.out[0] + deli + this.out[1] + deli + this.out[2];
       // console.log(word);
       this.input.word = word;
-      return this.input;
     }
   }]);
 
@@ -519,10 +529,13 @@ var DecFrac = exports.DecFrac = function () {
     key: 'output',
     value: function output() {
       if (this.input.word.indexOf('.') >= 0) {
-        console.log(this.input.word.indexOf('.'));
+        // console.log(this.input.word.indexOf('.'));
+        // console.log(this.input);
         this.decimal();
+        return this.input;
       } else {
         this.fraction();
+        return this.input;
       }
     }
   }, {
@@ -541,7 +554,7 @@ var DecFrac = exports.DecFrac = function () {
       word = int + ' point ' + word.trim();
       // console.log(word);
       this.input.word = word;
-      return this.input;
+      // console.log(this.input);
     }
   }, {
     key: 'fraction',
@@ -554,7 +567,6 @@ var DecFrac = exports.DecFrac = function () {
       word += ' by ' + num1.find();
       // console.log(word);
       this.input.word = word;
-      return this.input;
     }
   }]);
 
@@ -630,33 +642,46 @@ var SuffixPrefix = exports.SuffixPrefix = function () {
     _classCallCheck(this, SuffixPrefix);
 
     this.input = word;
-    this.select = 'none';
   }
 
   _createClass(SuffixPrefix, [{
     key: 'output',
     value: function output() {
-      var numpart = this.input.word.match(/\d+/);
+      var numpart = this.input.word.match(/\d+/g);
+      // console.log(numpart);
       var restpart = this.input.word.split(/\d+/);
-      var num = new _Num2Words.Num2Words(numpart[0]);
+      // console.log(restpart);
+      var num = void 0;
+      var numcontain = [];
       var word = '';
-      if (/^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/.test(this.input.word)) {
-        word = restpart[0] + num.find();
-        // console.log(word);
-        this.input.word = word.trim();
-        return this.input;
-      } else {
-        word = num.find() + restpart[1];
-        word = word.replace('threerd', 'third');
-        word = word.replace('onest', 'first');
-        word = word.replace('twond', 'second');
-        word = word.replace('fiveth', 'fifth');
-        word = word.replace('eightth', 'eighth');
-        word = word.replace('nineth', 'ninth');
-        // console.log(word);
-        this.input.word = word.trim();
-        return this.input;
+      for (var i = 0; i < numpart.length; i++) {
+        num = new _Num2Words.Num2Words(numpart[i]);
+        numcontain.push(num.find());
       }
+      // if (/^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/.test(this.input.word)) {
+      // word = restpart[0] + num.find();
+      // console.log(word);
+      // this.input.word = word.trim();
+      // return this.input;
+      // } else {
+
+      // word = num.find() + restpart[1];
+      for (var _i = 0; _i < restpart.length; _i++) {
+        if (numcontain[_i] !== undefined) {
+          word += restpart[_i] + numcontain[_i];
+        } else {
+          word += restpart[_i];
+        }
+      }
+      word = word.replace('threerd', 'third');
+      word = word.replace('onest', 'first');
+      word = word.replace('twond', 'second');
+      word = word.replace('fiveth', 'fifth');
+      word = word.replace('eightth', 'eighth');
+      word = word.replace('nineth', 'ninth');
+      // console.log(word);
+      this.input.word = word.trim();
+      return this.input;
     }
   }]);
 

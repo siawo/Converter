@@ -5,10 +5,13 @@ export class DecFrac {
   }
   output () {
     if (this.input.word.indexOf('.') >= 0) {
-      console.log(this.input.word.indexOf('.'));
+      // console.log(this.input.word.indexOf('.'));
+      // console.log(this.input);
       this.decimal();
+      return this.input;
     } else {
       this.fraction();
+      return this.input;
     }
   }
   decimal () {
@@ -25,7 +28,7 @@ export class DecFrac {
     word = int + ' point ' + word.trim();
     // console.log(word);
     this.input.word = word;
-    return this.input;
+    // console.log(this.input);
   }
   fraction () {
     let inp = this.input.word.split('/');
@@ -36,6 +39,5 @@ export class DecFrac {
     word += ' by ' + num1.find();
     // console.log(word);
     this.input.word = word;
-    return this.input;
   }
 }
