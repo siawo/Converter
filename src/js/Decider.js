@@ -18,7 +18,7 @@ export class Decider {
       let out = cardinalOb.output();
       return out;
     } else if (mid.test(this.input.word)) {
-      // console.log(this.input);
+      console.log(this.input);
       let special = new SpecialMiddle(this.input);
       let out = special.whichSpecialMiddle();
       // console.log(out);
@@ -28,6 +28,8 @@ export class Decider {
       let out = sufprefOb.output();
       // console.log(this.input);
       return out;
+    } else {
+      return this.input;
     }
   }
 }
