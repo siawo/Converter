@@ -277,7 +277,7 @@ var Decider = exports.Decider = function () {
       var pref = /^\d+[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*/;
       // console.log(mid.test(this.input[i]));
       if (mid.test(this.input)) {
-        console.log(this.input);
+        // console.log(this.input);
         var special = new _Special_middle.SpecialMiddle(this.input);
         var out = special.whichSpecialMiddle();
         // console.log(out);
@@ -318,6 +318,11 @@ var _Num2Words = __webpack_require__(0);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * This class converts numbers to words
+ * @constructor
+ * @param {string} input only numbers
+ */
 var Cardinal = exports.Cardinal = function () {
   function Cardinal(input) {
     _classCallCheck(this, Cardinal);
@@ -420,6 +425,11 @@ var _Num2Words = __webpack_require__(0);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * This class converts date in numbers to words
+ * @constructor
+ * @param {string} input only numbers
+ */
 var Date = exports.Date = function () {
   function Date(input) {
     _classCallCheck(this, Date);
@@ -654,6 +664,10 @@ var SuffixPrefix = exports.SuffixPrefix = function () {
       // console.log(numpart);
       var restpart = this.input.split(/\d+/);
       // console.log(restpart);
+      var space = ' ';
+      if (/\d+[s][t][.]*$|\d+[n][d][.]*$|\d+[r][d][.]*$|\d+[r][d][.]*$/.test(this.input)) {
+        space = '';
+      }
       var num = void 0;
       var numcontain = [];
       var word = '';
@@ -661,17 +675,9 @@ var SuffixPrefix = exports.SuffixPrefix = function () {
         num = new _Num2Words.Num2Words(numpart[i]);
         numcontain.push(num.find());
       }
-      // if (/^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/.test(this.input)) {
-      // word = restpart[0] + num.find();
-      // console.log(word);
-      // this.input = word.trim();
-      // return this.input;
-      // } else {
-
-      // word = num.find() + restpart[1];
       for (var _i = 0; _i < restpart.length; _i++) {
         if (numcontain[_i] !== undefined) {
-          word += restpart[_i] + numcontain[_i];
+          word += restpart[_i] + space + numcontain[_i] + space;
         } else {
           word += restpart[_i];
         }

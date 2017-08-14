@@ -3,19 +3,35 @@
     <head>
         <title>Number to Word Converter</title>
         <style type="text/css">
-            body {background-color: red;}
+            body {background-color: #3680f7;}
             textarea {
+            	display: block;
                 height: 40%;
                 width: 80%;
-                background-color: blue;
+                margin: auto;
+                background-color: #00358c;
+                color: white;
+                border-radius: 1%;
             }
+            h1 { text-align: center;
+				color: #3a3a3a;
+             }
+            button { display: block;
+					margin: auto;
+					height: 60px;
+					width: 150px;
+					background-color: #b9f79e;
+					border-radius: 8%;
+					font-weight: bold;
+					font-size: 25px;
+					color: #3a3a3a;
+             }
         </style>
     </head>
     <body>
+        <h1>Number to Words Converter</h1>
         <textarea id="input" ></textarea>
-        <br>
-        <button type="button" id="b1">Number to Words</button>
-          <br>
-          <textarea id="output"></textarea>  
+        <button type="button" id="b1">Convert</button>
+        <textarea id="output"></textarea>  
     </body>
     </html>
