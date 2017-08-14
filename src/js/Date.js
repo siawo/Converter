@@ -1,4 +1,9 @@
 import {Num2Words} from './Num2Words.js';
+/**
+ * This class converts date in numbers to words
+ * @constructor
+ * @param {string} input only numbers
+ */
 export class Date {
   constructor (input) {
     this.input = input;
