@@ -8,6 +8,10 @@ export class SuffixPrefix {
     // console.log(numpart);
     var restpart = this.input.split(/\d+/);
     // console.log(restpart);
+    let space = ' ';
+    if (/\d+[s][t][.]*$|\d+[n][d][.]*$|\d+[r][d][.]*$|\d+[r][d][.]*$/.test(this.input)) {
+      space = '';
+    }
     let num;
     let numcontain = [];
     let word = '';
@@ -15,17 +19,9 @@ export class SuffixPrefix {
       num = new Num2Words(numpart[i]);
       numcontain.push(num.find());
     }
-    // if (/^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/.test(this.input)) {
-    // word = restpart[0] + num.find();
-    // console.log(word);
-    // this.input = word.trim();
-    // return this.input;
-    // } else {
-
-    // word = num.find() + restpart[1];
     for (let i = 0; i < restpart.length; i++) {
       if (numcontain[i] !== undefined) {
-        word += restpart[i] + numcontain[i];
+        word += restpart[i] + space + numcontain[i] + space;
       } else {
         word += restpart[i];
       }
