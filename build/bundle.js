@@ -78,11 +78,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * This class takes a number in string and converts it to corresponding number in words
+ * @constructor
+ * @param {string} input string of numbers without space
+ */
 var Num2Words = exports.Num2Words = function () {
   function Num2Words(input) {
     _classCallCheck(this, Num2Words);
 
-    // console.log(input);
     this.input = input;
     this.ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
     this.mid = ['', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
@@ -169,6 +173,11 @@ var _Decider = __webpack_require__(2);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * This class identifies the words containig a numberic character and send it to decide
+ * @constructor
+ * @param {string} input a string with any no of words
+ */
 var Identifier = function () {
   function Identifier(input) {
     _classCallCheck(this, Identifier);
@@ -259,12 +268,16 @@ var _Suffix_prefix = __webpack_require__(9);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * This class decides the type of input
+ * @constructor
+ * @param {string} input any sinlge string without any space 
+ */
 var Decider = exports.Decider = function () {
   function Decider(out) {
     _classCallCheck(this, Decider);
 
     this.input = out;
-    // console.log(this.input);
   }
 
   _createClass(Decider, [{
@@ -272,15 +285,11 @@ var Decider = exports.Decider = function () {
     value: function decide() {
       var dig = /^\d+$/;
       var mid = /^\d{1,2}[/-]\d{1,2}[/-]\d{2,4}$|^\d{1,2}[:]\d{2}$|^\d+[/.]\d+$|^0\d{10}$|^[+]\d{2}[-| ]\d{10}/;
-      // let sufpref = /^[A-Za-z]*\d+[A-Za-z]*/;
       var suf = /^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/;
       var pref = /^\d+[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*/;
-      // console.log(mid.test(this.input[i]));
       if (mid.test(this.input)) {
-        // console.log(this.input);
         var special = new _Special_middle.SpecialMiddle(this.input);
         var out = special.whichSpecialMiddle();
-        // console.log(out);
         return out;
       } else if (dig.test(this.input)) {
         var cardinalOb = new _Cardinal.Cardinal(this.input);
@@ -289,7 +298,6 @@ var Decider = exports.Decider = function () {
       } else if (suf.test(this.input) || pref.test(this.input)) {
         var sufprefOb = new _Suffix_prefix.SuffixPrefix(this.input);
         var _out2 = sufprefOb.output();
-        // console.log(this.input);
         return _out2;
       } else {
         return this.input;
@@ -367,6 +375,11 @@ var _Phone = __webpack_require__(8);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * This class checks for any special character and decides whether it is date, time, decimal, fraction, or phone number
+ * @constructor
+ * @param {string} input string of numbers having special character without spaces 
+ */
 var SpecialMiddle = exports.SpecialMiddle = function () {
   function SpecialMiddle(input) {
     _classCallCheck(this, SpecialMiddle);
@@ -486,6 +499,11 @@ var _Num2Words = __webpack_require__(0);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * This class convrts time in number to words
+ * @constructor
+ * @param {string} input any sinlge string word having two digit number in front of colon and 2 digit after colon
+ */
 var Time = exports.Time = function () {
   function Time(input) {
     _classCallCheck(this, Time);
@@ -504,7 +522,6 @@ var Time = exports.Time = function () {
       }
       var word = '';
       word = this.out[0] + ':' + this.out[1];
-      // console.log(word);
       this.input = word;
       return this.input;
     }
@@ -531,6 +548,11 @@ var _Num2Words = __webpack_require__(0);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * This class converts Decimal/fraction in numbers to words
+ * @constructor
+ * @param {string} input number with single dot or single forward slash 
+ */
 var DecFrac = exports.DecFrac = function () {
   function DecFrac(input) {
     _classCallCheck(this, DecFrac);
@@ -542,8 +564,6 @@ var DecFrac = exports.DecFrac = function () {
     key: 'output',
     value: function output() {
       if (this.input.indexOf('.') >= 0) {
-        // console.log(this.input.indexOf('.'));
-        // console.log(this.input);
         this.decimal();
         return this.input;
       } else {
@@ -604,6 +624,11 @@ var _Num2Words = __webpack_require__(0);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * This class converts phone number from number to words
+ * @constructor
+ * @param {string} input phone numner staring with zero followed by {10 digit} or +{code}-{10 digit number} 
+ */
 var Phone = exports.Phone = function () {
   function Phone(input) {
     _classCallCheck(this, Phone);
@@ -650,6 +675,11 @@ var _Num2Words = __webpack_require__(0);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * This class decides converts a number with suffix or prefix. It also converts number ordinal to word ordinal
+ * @constructor
+ * @param {string} input any sinlge string word having a prefix or suffix 
+ */
 var SuffixPrefix = exports.SuffixPrefix = function () {
   function SuffixPrefix(word) {
     _classCallCheck(this, SuffixPrefix);
