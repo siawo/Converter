@@ -1,6 +1,10 @@
+/**
+ * This class takes a number in string and converts it to corresponding number in words
+ * @constructor
+ * @param {string} input string of numbers without space
+ */
 export class Num2Words {
   constructor (input) {
-    // console.log(input);
     this.input = input;
     this.ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
     this.mid = ['', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];

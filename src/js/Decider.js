@@ -1,23 +1,23 @@
 import {Cardinal} from './Cardinal.js';
 import {SpecialMiddle} from './Special_middle.js';
 import {SuffixPrefix} from './Suffix_prefix.js';
+/**
+ * This class decides the type of input
+ * @constructor
+ * @param {string} input any sinlge string without any space 
+ */
 export class Decider {
   constructor (out) {
     this.input = out;
-    // console.log(this.input);
   }
   decide () {
     let dig = /^\d+$/;
     let mid = /^\d{1,2}[/-]\d{1,2}[/-]\d{2,4}$|^\d{1,2}[:]\d{2}$|^\d+[/.]\d+$|^0\d{10}$|^[+]\d{2}[-| ]\d{10}/;
-    // let sufpref = /^[A-Za-z]*\d+[A-Za-z]*/;
     let suf = /^[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*\d+$/;
     let pref = /^\d+[@#`~$%^&*()_\-+={}\\|:;"'?.>,<A-Za-z]*/;
-    // console.log(mid.test(this.input[i]));
     if (mid.test(this.input)) {
-      // console.log(this.input);
       let special = new SpecialMiddle(this.input);
       let out = special.whichSpecialMiddle();
-      // console.log(out);
       return out;
     } else if (dig.test(this.input)) {
       let cardinalOb = new Cardinal(this.input);
@@ -26,7 +26,6 @@ export class Decider {
     } else if (suf.test(this.input) || pref.test(this.input)) {
       let sufprefOb = new SuffixPrefix(this.input);
       let out = sufprefOb.output();
-      // console.log(this.input);
       return out;
     } else {
       return this.input;
