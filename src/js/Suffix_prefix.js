@@ -1,4 +1,9 @@
 import { Num2Words } from './Num2Words.js';
+/**
+ * This class decides converts a number with suffix or prefix. It also converts number ordinal to word ordinal
+ * @constructor
+ * @param {string} input any sinlge string word having a prefix or suffix 
+ */
 export class SuffixPrefix {
   constructor (word) {
     this.input = word;

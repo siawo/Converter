@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Cardinal.js</title>
+    <title>JSDoc: Source: Decider.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Cardinal.js</h1>
+    <h1 class="page-title">Source: Decider.js</h1>
 
     
 
@@ -26,21 +26,38 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {Num2Words} from './Num2Words.js';
+            <pre class="prettyprint source linenums"><code>import {Cardinal} from './Cardinal.js';
+import {SpecialMiddle} from './Special_middle.js';
+import {SuffixPrefix} from './Suffix_prefix.js';
 /**
- * This class converts numbers to words
+ * This class decides the type of input
  * @constructor
- * @param {string} input only numbers
+ * @param {string} input any sinlge string without any space 
  */
-export class Cardinal {
-  constructor (input) {
-    this.input = input;
+export class Decider {
+  constructor (out) {
+    this.input = out;
   }
-  output () {
-    let num = new Num2Words(this.input);
-    this.input = num.find();
-    // console.log(this.input);
-    return this.input;
+  decide () {
+    let dig = /^\d+$/;
+    let mid = /^\d{1,2}[/-]\d{1,2}[/-]\d{2,4}$|^\d{1,2}[:]\d{2}$|^\d+[/.]\d+$|^0\d{10}$|^[+]\d{2}[-| ]\d{10}/;
+    let suf = /^[@#`~$%^&amp;*()_\-+={}\\|:;"'?.>,&lt;A-Za-z]*\d+$/;
+    let pref = /^\d+[@#`~$%^&amp;*()_\-+={}\\|:;"'?.>,&lt;A-Za-z]*/;
+    if (mid.test(this.input)) {
+      let special = new SpecialMiddle(this.input);
+      let out = special.whichSpecialMiddle();
+      return out;
+    } else if (dig.test(this.input)) {
+      let cardinalOb = new Cardinal(this.input);
+      let out = cardinalOb.output();
+      return out;
+    } else if (suf.test(this.input) || pref.test(this.input)) {
+      let sufprefOb = new SuffixPrefix(this.input);
+      let out = sufprefOb.output();
+      return out;
+    } else {
+      return this.input;
+    }
   }
 }
 </code></pre>

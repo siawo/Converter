@@ -1,4 +1,9 @@
 import {Num2Words} from './Num2Words.js';
+/**
+ * This class converts phone number from number to words
+ * @constructor
+ * @param {string} input phone numner staring with zero followed by {10 digit} or +{code}-{10 digit number} 
+ */
 export class Phone {
   constructor (input) {
     this.input = input;

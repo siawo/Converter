@@ -2,6 +2,11 @@ import {Date} from './Date.js';
 import {Time} from './Time.js';
 import {DecFrac} from './Dec_frac.js';
 import {Phone} from './Phone.js';
+/**
+ * This class checks for any special character and decides whether it is date, time, decimal, fraction, or phone number
+ * @constructor
+ * @param {string} input string of numbers having special character without spaces 
+ */
 export class SpecialMiddle {
   constructor (input) {
     this.input = input;

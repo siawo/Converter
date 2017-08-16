@@ -1,4 +1,9 @@
 import {Decider} from './Decider.js';
+/**
+ * This class identifies the words containig a numberic character and send it to decide
+ * @constructor
+ * @param {string} input a string with any no of words
+ */
 class Identifier {
   constructor (input) {
     this.input = input;

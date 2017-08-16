@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Cardinal.js</title>
+    <title>JSDoc: Source: Dec_frac.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Cardinal.js</h1>
+    <h1 class="page-title">Source: Dec_frac.js</h1>
 
     
 
@@ -28,19 +28,48 @@
         <article>
             <pre class="prettyprint source linenums"><code>import {Num2Words} from './Num2Words.js';
 /**
- * This class converts numbers to words
+ * This class converts Decimal/fraction in numbers to words
  * @constructor
- * @param {string} input only numbers
+ * @param {string} input number with single dot or single forward slash 
  */
-export class Cardinal {
+export class DecFrac {
   constructor (input) {
     this.input = input;
   }
   output () {
-    let num = new Num2Words(this.input);
-    this.input = num.find();
+    if (this.input.indexOf('.') >= 0) {
+      this.decimal();
+      return this.input;
+    } else {
+      this.fraction();
+      return this.input;
+    }
+  }
+  decimal () {
+    let inp = this.input.split('.');
+    let num = new Num2Words(inp[0]);
+    let int = '';
+    int = num.find();
+    let deci = inp[1];
+    let word = '';
+    for (let i = 0; i &lt; inp[1].length; i++) {
+      let num1 = new Num2Words(deci[i]);
+      word += num1.find() + ' ';
+    }
+    word = int + ' point ' + word.trim();
+    // console.log(word);
+    this.input = word;
     // console.log(this.input);
-    return this.input;
+  }
+  fraction () {
+    let inp = this.input.split('/');
+    let num = new Num2Words(inp[0]);
+    let word = '';
+    word = num.find();
+    let num1 = new Num2Words(inp[1]);
+    word += ' by ' + num1.find();
+    // console.log(word);
+    this.input = word;
   }
 }
 </code></pre>

@@ -1,12 +1,15 @@
 import {Num2Words} from './Num2Words.js';
+/**
+ * This class converts Decimal/fraction in numbers to words
+ * @constructor
+ * @param {string} input number with single dot or single forward slash 
+ */
 export class DecFrac {
   constructor (input) {
     this.input = input;
   }
   output () {
     if (this.input.indexOf('.') >= 0) {
-      // console.log(this.input.indexOf('.'));
-      // console.log(this.input);
       this.decimal();
       return this.input;
     } else {

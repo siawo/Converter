@@ -1,4 +1,9 @@
 import {Num2Words} from './Num2Words.js';
+/**
+ * This class convrts time in number to words
+ * @constructor
+ * @param {string} input any sinlge string word having two digit number in front of colon and 2 digit after colon
+ */
 export class Time {
   constructor (input) {
     this.input = input;
@@ -12,7 +17,6 @@ export class Time {
     }
     var word = '';
     word = this.out[0] + ':' + this.out[1];
-    // console.log(word);
     this.input = word;
     return this.input;
   }
