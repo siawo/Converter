@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Cardinal.js</title>
+    <title>JSDoc: Source: Special_middle.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Cardinal.js</h1>
+    <h1 class="page-title">Source: Special_middle.js</h1>
 
     
 
@@ -26,21 +26,44 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {Num2Words} from './Num2Words.js';
+            <pre class="prettyprint source linenums"><code>import {Date} from './Date.js';
+import {Time} from './Time.js';
+import {DecFrac} from './Dec_frac.js';
+import {Phone} from './Phone.js';
 /**
- * This class converts numbers to words
+ * This class checks for any special character and decides whether it is date, time, decimal, fraction, or phone number
  * @constructor
- * @param {string} input only numbers
+ * @param {string} input string of numbers having special character without spaces 
  */
-export class Cardinal {
+export class SpecialMiddle {
   constructor (input) {
     this.input = input;
   }
-  output () {
-    let num = new Num2Words(this.input);
-    this.input = num.find();
-    // console.log(this.input);
-    return this.input;
+  whichSpecialMiddle () {
+    let date = /^\d{1,2}[/-]\d{1,2}[/-]\d{2,4}$/g;
+    let time = /^\d{1,2}[:]\d{2}$/;
+    let decfrac = /^\d+[/.]\d+$/;
+    let phone = /^0\d{10}$|^[+]\d{2}[-]\d{10}/;
+    if (date.test(this.input)) {
+      let dateOb = new Date(this.input);
+      let out = dateOb.output();
+      return out;
+    } else if (time.test(this.input)) {
+      let timeOb = new Time(this.input);
+      let out = timeOb.output();
+      return out;
+    } else if (decfrac.test(this.input)) {
+      let decfracOb = new DecFrac(this.input);
+      let out = decfracOb.output();
+      // console.log(out);
+      return out;
+    } else if (phone.test(this.input)) {
+      let phone = new Phone(this.input);
+      let out = phone.output();
+      return out;
+    } else {
+      return this.input;
+    }
   }
 }
 </code></pre>

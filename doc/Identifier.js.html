@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Cardinal.js</title>
+    <title>JSDoc: Source: Identifier.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Cardinal.js</h1>
+    <h1 class="page-title">Source: Identifier.js</h1>
 
     
 
@@ -26,23 +26,61 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {Num2Words} from './Num2Words.js';
+            <pre class="prettyprint source linenums"><code>import {Decider} from './Decider.js';
 /**
- * This class converts numbers to words
+ * This class identifies the words containig a numberic character and send it to decide
  * @constructor
- * @param {string} input only numbers
+ * @param {string} input a string with any no of words
  */
-export class Cardinal {
+class Identifier {
   constructor (input) {
     this.input = input;
+    this.text = [];
+    this.c1 = 0;
+    this.c2 = 0;
   }
+  send () {
+    this.text = this.input.split(/\s+/g);
+    // console.log(text);
+    let regexp = /\d+/;
+    let dec, out;
+    // let that = this;
+    // this.c1 = 0;
+    // this.c2 = 0;
+    for (let i = 0; i &lt; this.text.length; i++) {
+      if (regexp.test(this.text[i])) {
+        this.c1++;
+        // console.log(text[i]);
+        setTimeout(function (that) {
+          let j = i;
+          that.c2++;
+          dec = new Decider(that.text[i]);
+          out = dec.decide();
+          // console.log(out);
+          that.text[j] = out;
+          // console.log(that.text);
+          if (that.c1 === that.c2) {
+            that.output();
+          }
+        }, 0, this);
+      }
+    }
+    if (this.c1 === 0) {
+      this.output();
+    }
+  }
+
   output () {
-    let num = new Num2Words(this.input);
-    this.input = num.find();
-    // console.log(this.input);
-    return this.input;
+    document.getElementById('output').innerHTML += this.text.join(' ');
   }
 }
+let checker = () => {
+  let input = document.getElementById('input').value;
+  document.getElementById('output').innerHTML = '';
+  let i = new Identifier(input);
+  i.send();
+};
+document.getElementById('b1').addEventListener('click', checker);
 </code></pre>
         </article>
     </section>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Date.js</title>
+    <title>JSDoc: Source: Suffix_prefix.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Date.js</h1>
+    <h1 class="page-title">Source: Suffix_prefix.js</h1>
 
     
 
@@ -26,37 +26,48 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {Num2Words} from './Num2Words.js';
+            <pre class="prettyprint source linenums"><code>import { Num2Words } from './Num2Words.js';
 /**
- * This class converts date in numbers to words
+ * This class decides converts a number with suffix or prefix. It also converts number ordinal to word ordinal
  * @constructor
- * @param {string} input only numbers
+ * @param {string} input any sinlge string word having a prefix or suffix 
  */
-export class Date {
-  constructor (input) {
-    this.input = input;
-    this.out = [];
+export class SuffixPrefix {
+  constructor (word) {
+    this.input = word;
   }
   output () {
-    // console.log(this.input);
-    let inp = this.input.split(/[/]|[-]/);
-    for (let i = 0; i &lt; inp.length; i++) {
-      let num = new Num2Words(inp[i]);
-      this.out.push(num.find());
+    var numpart = this.input.match(/\d+/g);
+    // console.log(numpart);
+    var restpart = this.input.split(/\d+/);
+    // console.log(restpart);
+    let space = ' ';
+    if (/\d+[s][t][.]*$|\d+[n][d][.]*$|\d+[r][d][.]*$|\d+[r][d][.]*$/.test(this.input)) {
+      space = '';
     }
-    if (this.input.indexOf('/') >= 0) {
-      this.create('/');
-      return this.input;
-    } else {
-      this.create('-');
-      return this.input;
+    let num;
+    let numcontain = [];
+    let word = '';
+    for (let i = 0; i &lt; numpart.length; i++) {
+      num = new Num2Words(numpart[i]);
+      numcontain.push(num.find());
     }
-  }
-  create (deli) {
-    var word = '';
-    word = this.out[0] + deli + this.out[1] + deli + this.out[2];
+    for (let i = 0; i &lt; restpart.length; i++) {
+      if (numcontain[i] !== undefined) {
+        word += restpart[i] + space + numcontain[i] + space;
+      } else {
+        word += restpart[i];
+      }
+    }
+    word = word.replace('threerd', 'third');
+    word = word.replace('onest', 'first');
+    word = word.replace('twond', 'second');
+    word = word.replace('fiveth', 'fifth');
+    word = word.replace('eightth', 'eighth');
+    word = word.replace('nineth', 'ninth');
     // console.log(word);
-    this.input = word;
+    this.input = word.trim();
+    return this.input;
   }
 }
 </code></pre>

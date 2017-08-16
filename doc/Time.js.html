@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Cardinal.js</title>
+    <title>JSDoc: Source: Time.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Cardinal.js</h1>
+    <h1 class="page-title">Source: Time.js</h1>
 
     
 
@@ -28,18 +28,24 @@
         <article>
             <pre class="prettyprint source linenums"><code>import {Num2Words} from './Num2Words.js';
 /**
- * This class converts numbers to words
+ * This class convrts time in number to words
  * @constructor
- * @param {string} input only numbers
+ * @param {string} input any sinlge string word having two digit number in front of colon and 2 digit after colon
  */
-export class Cardinal {
+export class Time {
   constructor (input) {
     this.input = input;
+    this.out = [];
   }
   output () {
-    let num = new Num2Words(this.input);
-    this.input = num.find();
-    // console.log(this.input);
+    let inp = this.input.split(/[:]/);
+    for (let i = 0; i &lt; inp.length; i++) {
+      let num = new Num2Words(inp[i]);
+      this.out.push(num.find());
+    }
+    var word = '';
+    word = this.out[0] + ':' + this.out[1];
+    this.input = word;
     return this.input;
   }
 }
